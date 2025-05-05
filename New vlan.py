@@ -6,7 +6,7 @@ username = "admin"
 
 # VLANs to create
 vlans_to_create = [
-    {"vlan_id": 110, "vlan_name": "New VLAN"},
+    {"vlan_id": 110, "vlan_name": "NewVLAN"},
 ]
 
 # List of EXOS switches in Access Closet 1
