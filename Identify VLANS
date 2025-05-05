@@ -1,0 +1,68 @@
+from netmiko import ConnectHandler
+from datetime import datetime
+
+# List of EXOS switches in Access Closet 1
+devices = [
+    {
+        "device_type": "extreme_exos",
+        "ip": "10.10.1.22",
+        "username": "admin",
+        "password": "password",
+        "name": "User_Network"
+    },
+    {
+        "device_type": "extreme_exos",
+        "ip": "10.10.1.24",
+        "username": "admin",
+        "password": "password",
+        "name": "Local_Switch"
+    },
+    {
+        "device_type": "extreme_exos",
+        "ip": "10.10.1.30",
+        "username": "admin",
+        "password": "password",
+        "name": "IT_Network"
+    },
+    {
+        "device_type": "extreme_exos",
+        "ip": "10.10.1.31",
+        "username": "admin",
+        "password": "password",
+        "name": "MGMT_Network"
+    },
+    {
+        "device_type": "extreme_exos",
+        "ip": "10.10.1.32",
+        "username": "admin",
+        "password": "password",
+        "name": "ACCT_Network"
+    }
+]
+
+def get_vlans(device):
+    try:
+        print(f"Connecting to {device['name']} at {device['ip']}...")
+        conn = ConnectHandler(
+            device_type=device["device_type"],
+            ip=device["ip"],
+            username=device["username"],
+            password=device["password"]
+        )
+
+        output = conn.send_command("show vlan")
+        print(f"\n=== VLANs on {device['name']} ({device['ip']}) ===")
+        print(output)
+        print("=" * 60 + "\n")
+
+        conn.disconnect()
+
+    except Exception as e:
+        print(f"[ERROR] Could not connect to {device['name']} at {device['ip']}: {e}")
+
+if __name__ == "__main__":
+    print("EXOS VLAN Discovery Script")
+    print(f"Run Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+
+    for device in devices:
+        get_vlans(device)
