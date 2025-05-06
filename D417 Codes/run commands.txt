@@ -1,0 +1,3 @@
+ansible-playbook -i access_closet_inventory.yml create_users_windows.yml
+
+ansible-playbook -i access_closet_inventory.yml create_users_linux.yml

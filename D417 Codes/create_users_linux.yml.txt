@@ -1,0 +1,14 @@
+---
+- name: Create local user accounts on Linux-based devices
+  hosts: User_Network, Local_Switch, IT_Network, MGMT_Network, ACCT_Network, Test_Box-1, Test_Box-2
+  tasks:
+    - name: Create local admin user on Linux systems
+      user:
+        name: "{{ item.username }}"
+        password: "{{ item.password | password_hash('sha512') }}"
+        groups: "{{ item.groups }}"
+        state: present
+      loop:
+        - { username: "Local-Admin", password: "WGU123", groups: "sudo" }  # For switches
+        - { username: "TestUser1", password: "WGU123", groups: "sudo" }   # For ACCT_Network test box
+        - { username: "TestUser2", password: "WGU123", groups: "sudo" }   # For MGMT_Network test box

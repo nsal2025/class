@@ -1,0 +1,15 @@
+---
+- name: Create local user accounts on Windows machines
+  hosts: WindowsDesktop-1, WindowsDesktop-2, WindowsDesktop-3, WindowsDesktop-4
+  tasks:
+    - name: Create local admin user
+      win_user:
+        name: "{{ item.username }}"
+        password: "{{ item.password }}"
+        groups: Administrators
+        state: present
+      loop:
+        - { username: "DesktopUser1", password: "WGU123" }
+        - { username: "DesktopUser2", password: "WGU123" }
+        - { username: "DesktopUser3", password: "WGU123" }
+        - { username: "DesktopUser4", password: "WGU123" }
