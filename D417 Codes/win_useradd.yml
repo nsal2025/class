@@ -1,0 +1,53 @@
+---
+- name: adding host
+  hosts: windows1
+  gather_facts: true
+
+  tasks:
+          - name: creating user "DesktopUser1"
+            win_user:
+                    name: "DesktopUser1"
+                    password: WGU123
+                    state: present
+                    groups:
+                            - Users
+
+- name: adding host
+  hosts: windows2
+  gather_facts: true
+
+  tasks:
+          - name: creating user "DesktopUser2"
+            win_user:
+                    name: "DesktopUser2"
+                    password: WGU123
+                    state: present
+                    groups:
+                            - Users
+
+
+- name: adding host
+  hosts: windows3
+  gather_facts: true
+
+  tasks:
+          - name: creating user "DesktopUser3"
+            win_user:
+                    name: "DesktopUser3"
+                    password: WGU123
+                    state: present
+                    groups:
+                            - Users
+
+- name: adding host
+  hosts: windows4
+  gather_facts: true
+
+  tasks:
+          - name: creating user "DesktopUser4"
+            win_user:
+                    name: "DesktopUser4"
+                    password: WGU123
+                    state: present
+                    groups:
+                            - Users
