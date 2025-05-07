@@ -1,0 +1,53 @@
+---
+- name: Create user accounts on Linux devices
+  hosts: linux_devices
+  become: yes
+  tasks:
+    - name: Create TestUser1 on linuxtest_box1
+      when: inventory_hostname == 'linuxtest_box1'
+      user:
+        name: TestUser1
+        password: "{{ 'WGU123' | password_hash('sha512') }}"
+        state: present
+        groups: sudo
+
+    - name: Create TestUser2 on linuxtest_box2
+      when: inventory_hostname == 'linuxtest_box2'
+      user:
+        name: TestUser2
+        password: "{{ 'WGU123' | password_hash('sha512') }}"
+        state: present
+        groups: sudo
+
+- name: Create user accounts on Windows devices
+  hosts: windows_devices
+  tasks:
+    - name: Create Desktop users
+      win_user:
+        name: "{{ item.username }}"
+        password: "{{ item.password }}"
+        state: present
+        local: yes
+        groups:
+          - Administrators
+      loop:
+        - { username: 'DesktopUser1', password: 'WGU123' }
+        - { username: 'DesktopUser2', password: 'WGU123' }
+        - { username: 'DesktopUser3', password: 'WGU123' }
+        - { username: 'DesktopUser4', password: 'WGU123' }
+
+- name: Create user on Switches (EXOS)
+  hosts: switches
+  gather_facts: no
+  tasks:
+    - name: Create Local-Admin user on EXOS switches
+      command: create account Local-Admin "WGU123" access all
+      register: switch_create_user
+
+    - name: Show account configuration
+      command: show accounts
+      register: account_output
+
+    - name: Output result of user creation on switches
+      debug:
+        var: account_output.stdout
