@@ -1,111 +1,55 @@
-student@student-Standard-PC-i440FX-PIIX-1996:~/Desktop$ ansible-playbook -i inventory.ini user_setup.yml -vvv
-ansible-playbook 2.9.6
+ "basic: HTTPSConnectionPool(host='10.10.1.43', port=5986): Max retries exceeded with url: /wsman (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x7fca269a5d00>, 'Connection to 10.10.1.43 timed out. (connect timeout=30)'))",
+    "unreachable": true
+}
+windowsdesktop4 | UNREACHABLE! => {
+    "changed": false,
+    "msg": "basic: HTTPSConnectionPool(host='10.10.1.29', port=5986): Max retries exceeded with url: /wsman (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x7fca269a6e80>, 'Connection to 10.10.1.29 timed out. (connect timeout=30)'))",
+    "unreachable": true
+}
+student@student-Standard-PC-i440FX-PIIX-1996:~/Desktop$ 
+student@student-Standard-PC-i440FX-PIIX-1996:~/Desktop$ ansible -i inv_final.ini windows_devices -m win_ping -vvv
+ansible 2.9.6
   config file = /etc/ansible/ansible.cfg
   configured module search path = ['/home/student/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
   ansible python module location = /usr/lib/python3/dist-packages/ansible
-  executable location = /usr/bin/ansible-playbook
+  executable location = /usr/bin/ansible
   python version = 3.8.10 (default, Mar 13 2023, 10:26:41) [GCC 9.4.0]
 Using /etc/ansible/ansible.cfg as config file
-host_list declined parsing /home/student/Desktop/inventory.ini as it did not pass its verify_file() method
-script declined parsing /home/student/Desktop/inventory.ini as it did not pass its verify_file() method
-auto declined parsing /home/student/Desktop/inventory.ini as it did not pass its verify_file() method
-yaml declined parsing /home/student/Desktop/inventory.ini as it did not pass its verify_file() method
-Parsed /home/student/Desktop/inventory.ini inventory source with ini plugin
-
-PLAYBOOK: user_setup.yml *******************************************************
-2 plays in user_setup.yml
-
-PLAY [Create user accounts on Linux and Windows devices] ***********************
-
-TASK [Gathering Facts] *********************************************************
-task path: /home/student/Desktop/user_setup.yml:2
-<10.10.1.56> ESTABLISH SSH CONNECTION FOR USER: student      # Replace with your SSH username
-<10.10.1.56> SSH: EXEC sshpass -d11 ssh -C -o ControlMaster=auto -o ControlPersist=60s -o 'User="student      # Replace with your SSH username"' -o ConnectTimeout=10 -o ControlPath=/home/student/.ansible/cp/8334c08c01 10.10.1.56 '/bin/sh -c '"'"'echo '"'"'"'"'"'"'"'"'~student      # Replace with your SSH username'"'"'"'"'"'"'"'"' && sleep 0'"'"''
-<10.10.1.57> ESTABLISH SSH CONNECTION FOR USER: student      # Replace with your SSH username
-<10.10.1.57> SSH: EXEC sshpass -d13 ssh -C -o ControlMaster=auto -o ControlPersist=60s -o 'User="student      # Replace with your SSH username"' -o ConnectTimeout=10 -o ControlPath=/home/student/.ansible/cp/822d4882dd 10.10.1.57 '/bin/sh -c '"'"'echo '"'"'"'"'"'"'"'"'~student      # Replace with your SSH username'"'"'"'"'"'"'"'"' && sleep 0'"'"''
-Using module file /usr/lib/python3/dist-packages/ansible/modules/windows/setup.ps1
+host_list declined parsing /home/student/Desktop/inv_final.ini as it did not pass its verify_file() method
+script declined parsing /home/student/Desktop/inv_final.ini as it did not pass its verify_file() method
+auto declined parsing /home/student/Desktop/inv_final.ini as it did not pass its verify_file() method
+yaml declined parsing /home/student/Desktop/inv_final.ini as it did not pass its verify_file() method
+Parsed /home/student/Desktop/inv_final.ini inventory source with ini plugin
+META: ran handlers
+Using module file /usr/lib/python3/dist-packages/ansible/modules/windows/win_ping.ps1
 Pipelining is enabled.
-fatal: [windowsdesktop3]: FAILED! => {
-    "msg": "The powershell shell family is incompatible with the sudo become plugin"
-}
-Using module file /usr/lib/python3/dist-packages/ansible/modules/windows/setup.ps1
+<10.10.1.35> ESTABLISH WINRM CONNECTION FOR USER: student on PORT 5986 TO 10.10.1.35
+Using module file /usr/lib/python3/dist-packages/ansible/modules/windows/win_ping.ps1
 Pipelining is enabled.
-Using module file /usr/lib/python3/dist-packages/ansible/modules/windows/setup.ps1
+<10.10.1.43> ESTABLISH WINRM CONNECTION FOR USER: student on PORT 5986 TO 10.10.1.43
+Using module file /usr/lib/python3/dist-packages/ansible/modules/windows/win_ping.ps1
 Pipelining is enabled.
-fatal: [windowsdesktop4]: FAILED! => {
-    "msg": "The powershell shell family is incompatible with the sudo become plugin"
-}
-Using module file /usr/lib/python3/dist-packages/ansible/modules/windows/setup.ps1
+<10.10.1.29> ESTABLISH WINRM CONNECTION FOR USER: student on PORT 5986 TO 10.10.1.29
+Using module file /usr/lib/python3/dist-packages/ansible/modules/windows/win_ping.ps1
 Pipelining is enabled.
-fatal: [windowsdesktop2]: FAILED! => {
-    "msg": "The powershell shell family is incompatible with the sudo become plugin"
-}
-<10.10.1.32> ESTABLISH SSH CONNECTION FOR USER: admin               # SSH username for switches
-<10.10.1.32> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o 'IdentityFile="home/student/.ssh/id_rsa  # Path to SSH private key used for switches"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="admin               # SSH username for switches"' -o ConnectTimeout=10 -o ControlPath=/home/student/.ansible/cp/fb884fa0e9 10.10.1.32 '/bin/sh -c '"'"'echo '"'"'"'"'"'"'"'"'~admin               # SSH username for switches'"'"'"'"'"'"'"'"' && sleep 0'"'"''
-fatal: [windowsdesktop1]: FAILED! => {
-    "msg": "The powershell shell family is incompatible with the sudo become plugin"
-}
-<10.10.1.22> ESTABLISH SSH CONNECTION FOR USER: admin               # SSH username for switches
-<10.10.1.22> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o 'IdentityFile="home/student/.ssh/id_rsa  # Path to SSH private key used for switches"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="admin               # SSH username for switches"' -o ConnectTimeout=10 -o ControlPath=/home/student/.ansible/cp/5c0f38f396 10.10.1.22 '/bin/sh -c '"'"'echo '"'"'"'"'"'"'"'"'~admin               # SSH username for switches'"'"'"'"'"'"'"'"' && sleep 0'"'"''
-<10.10.1.31> ESTABLISH SSH CONNECTION FOR USER: admin               # SSH username for switches
-<10.10.1.31> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o 'IdentityFile="home/student/.ssh/id_rsa  # Path to SSH private key used for switches"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="admin               # SSH username for switches"' -o ConnectTimeout=10 -o ControlPath=/home/student/.ansible/cp/35fe499cba 10.10.1.31 '/bin/sh -c '"'"'echo '"'"'"'"'"'"'"'"'~admin               # SSH username for switches'"'"'"'"'"'"'"'"' && sleep 0'"'"''
-<10.10.1.22> (255, b'', b'no such identity: home/student/.ssh/id_rsa  # Path to SSH private key used for switches: No such file or directory\r\nadmin               # SSH username for switches@10.10.1.22: Permission denied (publickey,password).\r\n')
-<10.10.1.32> (255, b'', b'no such identity: home/student/.ssh/id_rsa  # Path to SSH private key used for switches: No such file or directory\r\nadmin               # SSH username for switches@10.10.1.32: Permission denied (publickey,password).\r\n')
-<10.10.1.31> (255, b'', b'no such identity: home/student/.ssh/id_rsa  # Path to SSH private key used for switches: No such file or directory\r\nadmin               # SSH username for switches@10.10.1.31: Permission denied (publickey,password).\r\n')
-fatal: [User_Network]: UNREACHABLE! => {
+<10.10.1.36> ESTABLISH WINRM CONNECTION FOR USER: student on PORT 5986 TO 10.10.1.36
+windowsdesktop1 | UNREACHABLE! => {
     "changed": false,
-    "msg": "Failed to connect to the host via ssh: no such identity: home/student/.ssh/id_rsa  # Path to SSH private key used for switches: No such file or directory\r\nadmin               # SSH username for switches@10.10.1.22: Permission denied (publickey,password).",
+    "msg": "basic: HTTPSConnectionPool(host='10.10.1.35', port=5986): Max retries exceeded with url: /wsman (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x7f60aa3e49d0>, 'Connection to 10.10.1.35 timed out. (connect timeout=30)'))",
     "unreachable": true
 }
-fatal: [Accounting_Switch]: UNREACHABLE! => {
+windowsdesktop3 | UNREACHABLE! => {
     "changed": false,
-    "msg": "Failed to connect to the host via ssh: no such identity: home/student/.ssh/id_rsa  # Path to SSH private key used for switches: No such file or directory\r\nadmin               # SSH username for switches@10.10.1.32: Permission denied (publickey,password).",
+    "msg": "basic: HTTPSConnectionPool(host='10.10.1.43', port=5986): Max retries exceeded with url: /wsman (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x7f60aa3e5cd0>, 'Connection to 10.10.1.43 timed out. (connect timeout=30)'))",
     "unreachable": true
 }
-fatal: [Management_Switch]: UNREACHABLE! => {
+windowsdesktop4 | UNREACHABLE! => {
     "changed": false,
-    "msg": "Failed to connect to the host via ssh: no such identity: home/student/.ssh/id_rsa  # Path to SSH private key used for switches: No such file or directory\r\nadmin               # SSH username for switches@10.10.1.31: Permission denied (publickey,password).",
+    "msg": "basic: HTTPSConnectionPool(host='10.10.1.29', port=5986): Max retries exceeded with url: /wsman (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x7f60aa3e6e50>, 'Connection to 10.10.1.29 timed out. (connect timeout=30)'))",
     "unreachable": true
 }
-<10.10.1.24> ESTABLISH SSH CONNECTION FOR USER: admin               # SSH username for switches
-<10.10.1.24> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o 'IdentityFile="home/student/.ssh/id_rsa  # Path to SSH private key used for switches"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="admin               # SSH username for switches"' -o ConnectTimeout=10 -o ControlPath=/home/student/.ansible/cp/3457d60f0b 10.10.1.24 '/bin/sh -c '"'"'echo '"'"'"'"'"'"'"'"'~admin               # SSH username for switches'"'"'"'"'"'"'"'"' && sleep 0'"'"''
-<10.10.1.30> ESTABLISH SSH CONNECTION FOR USER: admin               # SSH username for switches
-<10.10.1.30> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o 'IdentityFile="home/student/.ssh/id_rsa  # Path to SSH private key used for switches"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="admin               # SSH username for switches"' -o ConnectTimeout=10 -o ControlPath=/home/student/.ansible/cp/ac35ead43a 10.10.1.30 '/bin/sh -c '"'"'echo '"'"'"'"'"'"'"'"'~admin               # SSH username for switches'"'"'"'"'"'"'"'"' && sleep 0'"'"''
-<10.10.1.24> (255, b'', b'no such identity: home/student/.ssh/id_rsa  # Path to SSH private key used for switches: No such file or directory\r\nadmin               # SSH username for switches@10.10.1.24: Permission denied (publickey,password).\r\n')
-fatal: [Local_Switch]: UNREACHABLE! => {
+windowsdesktop2 | UNREACHABLE! => {
     "changed": false,
-    "msg": "Failed to connect to the host via ssh: no such identity: home/student/.ssh/id_rsa  # Path to SSH private key used for switches: No such file or directory\r\nadmin               # SSH username for switches@10.10.1.24: Permission denied (publickey,password).",
+    "msg": "basic: HTTPSConnectionPool(host='10.10.1.36', port=5986): Max retries exceeded with url: /wsman (Caused by ConnectTimeoutError(<urllib3.connection.VerifiedHTTPSConnection object at 0x7f60aa3e5b50>, 'Connection to 10.10.1.36 timed out. (connect timeout=30)'))",
     "unreachable": true
 }
-<10.10.1.30> (255, b'', b'no such identity: home/student/.ssh/id_rsa  # Path to SSH private key used for switches: No such file or directory\r\nadmin               # SSH username for switches@10.10.1.30: Permission denied (publickey,password).\r\n')
-fatal: [IT_Switch]: UNREACHABLE! => {
-    "changed": false,
-    "msg": "Failed to connect to the host via ssh: no such identity: home/student/.ssh/id_rsa  # Path to SSH private key used for switches: No such file or directory\r\nadmin               # SSH username for switches@10.10.1.30: Permission denied (publickey,password).",
-    "unreachable": true
-}
-<10.10.1.56> (5, b'', b'Permission denied, please try again.\r\n')
-fatal: [linuxtest_box1]: UNREACHABLE! => {
-    "changed": false,
-    "msg": "Invalid/incorrect password: Permission denied, please try again.",
-    "unreachable": true
-}
-<10.10.1.57> (5, b'', b'Permission denied, please try again.\r\n')
-fatal: [linuxtest_box2]: UNREACHABLE! => {
-    "changed": false,
-    "msg": "Invalid/incorrect password: Permission denied, please try again.",
-    "unreachable": true
-}
-
-PLAY RECAP *********************************************************************
-Accounting_Switch          : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
-IT_Switch                  : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
-Local_Switch               : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
-Management_Switch          : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
-User_Network               : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
-linuxtest_box1             : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
-linuxtest_box2             : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
-windowsdesktop1            : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
-windowsdesktop2            : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
-windowsdesktop3            : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
-windowsdesktop4            : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
-
